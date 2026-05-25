@@ -1,0 +1,24 @@
+name: Run Binance Bot
+on:
+  push:
+    branches: [ main ]
+  schedule:
+    - cron: '*/5 * * * *'
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout código
+      uses: actions/checkout@v3
+
+    - name: Configurar Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Instalar librerías
+      run: pip install pyTelegramBotAPI requests
+
+    - name: Ejecutar Bot
+      run: python bot.py
